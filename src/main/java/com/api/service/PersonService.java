@@ -112,7 +112,7 @@ public class PersonService implements PersonRepository {
 	@Override
 	public <S extends Person> S save(S entity) {
 		// TODO Auto-generated method stub
-		return null;
+		return personRepository.save(entity);
 	}
 
 	@Override
