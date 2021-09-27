@@ -92,4 +92,17 @@ export class AppComponent implements OnInit {
 
     }
   }
+
+  deletePerson(id:any){
+
+    console.log('id :>> ', id);
+
+    // return;
+
+    this.personalService.deletePerson(id).subscribe(resp=>{
+
+      console.log('resp :>> ', resp);
+
+    },err=>{console.error(err)});
+  }
 }

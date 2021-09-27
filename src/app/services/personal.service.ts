@@ -13,7 +13,12 @@ export class PersonalService {
   public getPersonal(): Observable<any>{
     return this.http.get(`${environment.ApiUrl}person/`);
   }
-   public savePerson(person:any): Observable<any>{
+
+  public savePerson(person:any): Observable<any>{
     return this.http.post(`${environment.ApiUrl}person/savePerson`, person);
+  }
+
+  public deletePerson(id:any):Observable<any>{
+    return this.http.delete(`${environment.ApiUrl}delete/${id}`);
   }
 }
