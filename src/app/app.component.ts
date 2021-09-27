@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PersonalService } from './services/personal.service';
 import { FormBuilder, Validators } from '@angular/forms';
+import Swal, { SweetAlertIcon } from 'sweetalert2';
 
 @Component({
   selector: 'app-root',
@@ -60,7 +61,19 @@ export class AppComponent implements OnInit {
       boss:this.f.controls.boss.value
     }
 
+    console.log('person :>> ', person);
+
      this.personalService.savePerson(person).subscribe(resp=>{
+
+      Swal.fire({
+        title: 'Success',
+        text: "User saved",
+        icon: 'success',
+        confirmButtonColor: '#075de8',
+        confirmButtonText: 'Ok'
+      }).then((result) => {
+        window.location.reload();
+      })
 
     },err =>{console.error(err)}
     );
