@@ -1,0 +1,10 @@
+$background-color:rgb(4,23,167);;
+$gradient:linear-gradient(16deg, rgba(4,23,167,1) 32%, rgba(1,2,10,1) 44%);
+
+.nav-style{
+    height: 10vh;
+    background: $background-color;
+    background: $gradient;
+}
+
+

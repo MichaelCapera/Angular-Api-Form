@@ -17,6 +17,15 @@ export class AppComponent implements OnInit {
   // bosses:any;
 
   public f = this.form.group({
+    id:[''],
+    name:['',[Validators.required]],
+    type:['',[Validators.required]],
+    boss:['',[Validators.required]]
+
+  });
+
+  public fU = this.form.group({
+    id:[''],
     name:['',[Validators.required]],
     type:['',[Validators.required]],
     boss:['',[Validators.required]]
@@ -31,10 +40,14 @@ export class AppComponent implements OnInit {
   ngOnInit(){
 
     this.personalService.getPersonal().subscribe(resp =>{
+     
+      let data = [];
+      for(const i in resp){
+        data.push(resp[i]);
+      }
+      this.data = data;  
 
-    this.data = Object.values(resp);  
-
-    for(const i in this.data){
+      for(const i in this.data){
 
         if(this.data[i].type == "boss"){
           this.bosses.push(this.data[i].name);
@@ -51,7 +64,7 @@ export class AppComponent implements OnInit {
     if(this.f.invalid){
       return;
     }
-     
+
     let person = {
       name:this.f.controls.name.value,
       type:this.f.controls.type.value,
@@ -60,7 +73,7 @@ export class AppComponent implements OnInit {
 
     this.personalService.savePerson(person).subscribe(resp=>{
 
-      Swal.fire({
+       Swal.fire({
         title: 'Success',
         text: "User saved",
         icon: 'success',
@@ -108,5 +121,34 @@ export class AppComponent implements OnInit {
 
      },err=>{console.error(err)}
     );
+  }
+
+  updatePerson(person:any){
+
+    let updateForm = this.fU.value;
+
+    for(const i in updateForm){
+
+      if(updateForm[i] == ''){
+
+        updateForm[i] = person[i]
+      
+      }
+    }
+
+    this.personalService.savePerson(updateForm).subscribe(resp=>{
+
+      Swal.fire({
+       title: 'Success',
+       text: "User updated",
+       icon: 'success',
+       confirmButtonColor: '#075de8',
+       confirmButtonText: 'Ok'
+     }).then((result) => {
+       window.location.reload();
+     })
+
+   },err =>{console.error(err)}
+   );
   }
 }
