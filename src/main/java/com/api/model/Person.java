@@ -21,11 +21,7 @@ public class Person {
     private String type;
     private String boss;
     
-	/*@ManyToOne
-	@JoinColumn(name = "id_boss")
-	private Boss boss;*/
-	
-	/**Empty constructor by default*/
+   /**Constructor*/
 	
 	public Person() {
 		

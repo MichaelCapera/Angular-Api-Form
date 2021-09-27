@@ -57,9 +57,4 @@ public class PersonRest {
 		return ResponseEntity.ok(!(personService.findById(id) !=null));
 		
 	}
-	
-	/*@PostMapping("/savePerson/")
-	public String postPerson(@RequestBody Person person) {
-		return person.toString();
-	}*/
 }
