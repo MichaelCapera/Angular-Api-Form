@@ -1,10 +1,12 @@
 package com.api.model;
 
 import javax.persistence.Entity;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.GenerationType;
 
@@ -14,13 +16,14 @@ public class Person {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private Long id;
     private String name;
     private String type;
+    private String boss;
     
-	@ManyToOne
+	/*@ManyToOne
 	@JoinColumn(name = "id_boss")
-	private Boss boss;
+	private Boss boss;*/
 	
 	/**Empty constructor by default*/
 	
@@ -30,7 +33,7 @@ public class Person {
 	
 	/**Constructor method*/
 
-	public Person(String name, String type, Boss boss) {
+	public Person(String name, String type, String boss) {
 		super();
 		this.name = name;
 		this.type = type;
@@ -39,11 +42,11 @@ public class Person {
 	
 	/**Getters and setters*/
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -63,11 +66,11 @@ public class Person {
 		this.type = type;
 	}
 
-	public Boss getBoss() {
+	public String getBoss() {
 		return boss;
 	}
 
-	public void setBoss(Boss boss) {
+	public void setBoss(String boss) {
 		this.boss = boss;
 	}
 	

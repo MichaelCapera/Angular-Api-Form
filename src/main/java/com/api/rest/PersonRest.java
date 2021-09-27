@@ -32,7 +32,7 @@ public class PersonRest {
 		
 	}
 	
-	@PostMapping
+	@PostMapping("savePerson")
 	private ResponseEntity<Person> savePerson (@RequestBody Person person){
 		
      try {
@@ -47,4 +47,9 @@ public class PersonRest {
 		
 	 
 	}
+	
+	/*@PostMapping("/savePerson/")
+	public String postPerson(@RequestBody Person person) {
+		return person.toString();
+	}*/
 }

@@ -16,14 +16,23 @@ import com.api.repository.PersonRepository;
 @Service
 public class PersonService implements PersonRepository {
 	
+	/*private String name;
+	private String type;
+	private int id_boss;*/
+	
 	@Autowired
 	private PersonRepository personRepository;
 
 	@Override
 	public List<Person> findAll() {
-		// TODO Auto-generated method stub
+		
 		return personRepository.findAll();
 	}
+	
+	/*@Override
+	public String toString() {
+		return "Person [name=" + name + ",type=" + type + ",id_boss=" + id_boss + "]";
+	}*/
 
 	@Override
 	public List<Person> findAll(Sort sort) {
@@ -111,7 +120,6 @@ public class PersonService implements PersonRepository {
 
 	@Override
 	public <S extends Person> S save(S entity) {
-		// TODO Auto-generated method stub
 		return personRepository.save(entity);
 	}
 
