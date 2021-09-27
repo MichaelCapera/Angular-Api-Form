@@ -6,5 +6,10 @@ $gradient:linear-gradient(16deg, rgba(4,23,167,1) 32%, rgba(1,2,10,1) 44%);
     background: $background-color;
     background: $gradient;
 }
+.p__0 [class*="col-"]{
+    padding: 0;
+}
+
+
 
 
