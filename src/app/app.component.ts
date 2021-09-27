@@ -39,11 +39,8 @@ export class AppComponent implements OnInit {
         if(this.data[i].type == "boss"){
           this.bosses.push(this.data[i].name);
         }
-    }
-
-    console.log('this.bosses :>> ', this.bosses);
-
-    },err => console.error(err));
+     }
+   },err => console.error(err));
   }
     
   //title = 'frontPersonal';
@@ -61,9 +58,7 @@ export class AppComponent implements OnInit {
       boss:this.f.controls.boss.value
     }
 
-    console.log('person :>> ', person);
-
-     this.personalService.savePerson(person).subscribe(resp=>{
+    this.personalService.savePerson(person).subscribe(resp=>{
 
       Swal.fire({
         title: 'Success',
@@ -94,15 +89,24 @@ export class AppComponent implements OnInit {
   }
 
   deletePerson(id:any){
-
-    console.log('id :>> ', id);
-
-    // return;
-
+    
     this.personalService.deletePerson(id).subscribe(resp=>{
 
       console.log('resp :>> ', resp);
 
-    },err=>{console.error(err)});
+       Swal.fire({
+        title: 'Success',
+        text: "User deleted",
+        icon: 'success',
+        confirmButtonColor: '#075de8',
+        confirmButtonText: 'Ok',
+        timer:10000
+      }).then((result) => {
+        window.location.reload();
+      })
+  
+
+     },err=>{console.error(err)}
+    );
   }
 }

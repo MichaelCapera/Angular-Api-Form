@@ -19,6 +19,6 @@ export class PersonalService {
   }
 
   public deletePerson(id:any):Observable<any>{
-    return this.http.delete(`${environment.ApiUrl}delete/${id}`);
+    return this.http.delete(`${environment.ApiUrl}person/delete/${id}`);
   }
 }
