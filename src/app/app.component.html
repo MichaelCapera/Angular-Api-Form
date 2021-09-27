@@ -6,10 +6,12 @@
 <div class="container mt-3">
   <h2>Personal List</h2>
   <p>The table contains the personal list with the name of the boss</p>  
-  
-  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+  <div class = "mb-3 mt-3"> 
+    <button type="button" class="btn btn-primary mb-4" 
+    data-bs-toggle="modal" data-bs-target="#myModal">
    Create person
   </button>
+</div>
   <table class="table">
     <thead>
       <tr>
@@ -81,8 +83,9 @@
             <select required class="form-select" 
             formControlName="type"
             [ngClass]="{'is-invalid': invalidField('type')}">
-              <option value = "boss">Boss</option>
-              <option value = "employee">Employee</option>
+              <option value="" selected>select a type</option>
+              <option Value = "boss">Boss</option>
+              <option Value = "employee">Employee</option>
             </select>
             <div class="invalid-feedback">
               Please provide a valid data.
@@ -93,9 +96,10 @@
             <select required class="form-select" 
             formControlName="boss"
             [ngClass]="{'is-invalid': invalidField('boss')}">
-              <option 
+            <option value="" selected>select a boss</option>
+             <option 
               *ngFor="let boss of bosses" 
-              value = "{{boss.id}}+{{boss.name}}">{{boss.name}}</option>
+              [ngValue] = "boss.id+boss.name">{{boss.name}}</option>
             </select>
             <div class="invalid-feedback">
               Please provide a valid data.

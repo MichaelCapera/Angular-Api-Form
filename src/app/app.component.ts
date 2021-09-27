@@ -38,7 +38,8 @@ export class AppComponent implements OnInit {
 
       this.bosses = Object.values(resp); 
     
-    },err => console.error(err));
+    },err => {console.error(err)}
+    );
 
     }
     
@@ -50,8 +51,26 @@ export class AppComponent implements OnInit {
     if(this.f.invalid){
       return;
     }
-    console.log('this.f :>> ', this.f);
-  }
+     
+    let boss = this.f.controls.boss.value;
+    let bossId = boss.split('+')[0];
+    let bossName = boss.split('+')[1];
+   
+
+    let person = {
+      name:this.f.controls.name.value,
+      type:this.f.controls.type.value,
+      id_boss:parseInt(bossId)
+    }
+    
+     this.personalService.savePerson(person).subscribe(resp=>{
+
+      
+
+    },err =>{console.error(err)}
+    );
+ 
+    }
 
   invalidField(field:string){
 
