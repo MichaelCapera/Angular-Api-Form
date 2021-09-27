@@ -143,8 +143,7 @@ public class PersonService implements PersonRepository {
 
 	@Override
 	public void deleteById(Long id) {
-		// TODO Auto-generated method stub
-		
+		personRepository.deleteById(id);
 	}
 
 	@Override
