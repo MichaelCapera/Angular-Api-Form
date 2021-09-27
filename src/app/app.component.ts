@@ -12,7 +12,8 @@ import { FormBuilder, Validators } from '@angular/forms';
 export class AppComponent implements OnInit {
 
   data:any;
-  bosses:any;
+  bosses:any[] = [];
+  // bosses:any;
 
   public f = this.form.group({
     name:['',[Validators.required]],
@@ -32,16 +33,17 @@ export class AppComponent implements OnInit {
 
     this.data = Object.values(resp);  
 
-    },err => console.error(err));
+    for(const i in this.data){
 
-    this.personalService.getBosses().subscribe(resp =>{
-
-      this.bosses = Object.values(resp); 
-    
-    },err => {console.error(err)}
-    );
-
+        if(this.data[i].type == "boss"){
+          this.bosses.push(this.data[i].name);
+        }
     }
+
+    console.log('this.bosses :>> ', this.bosses);
+
+    },err => console.error(err));
+  }
     
   //title = 'frontPersonal';
 
@@ -52,20 +54,13 @@ export class AppComponent implements OnInit {
       return;
     }
      
-    let boss = this.f.controls.boss.value;
-    let bossId = boss.split('+')[0];
-    let bossName = boss.split('+')[1];
-   
-
     let person = {
       name:this.f.controls.name.value,
       type:this.f.controls.type.value,
-      id_boss:parseInt(bossId)
+      boss:this.f.controls.boss.value
     }
-    
-     this.personalService.savePerson(person).subscribe(resp=>{
 
-      
+     this.personalService.savePerson(person).subscribe(resp=>{
 
     },err =>{console.error(err)}
     );

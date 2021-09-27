@@ -9,10 +9,10 @@
   <div class = "mb-3 mt-3"> 
     <button type="button" class="btn btn-primary mb-4" 
     data-bs-toggle="modal" data-bs-target="#myModal">
-   Create person
+   Create Employee
   </button>
 </div>
-  <table class="table">
+  <table class="table table-bordered">
     <thead>
       <tr>
         <th>Id</th>
@@ -27,8 +27,9 @@
       <tr  *ngFor = "let person of data">
         <td>{{person.id}}</td>
         <td>{{person.name}}</td>
-        <td>{{person.type}}</td>
-        <td>{{person.boss.name}}</td>
+        <td *ngIf="person.type == 'boss'" class="text-danger">{{person.type}}</td>
+        <td *ngIf="person.type == 'employee'" class="text-success">{{person.type}}</td>
+        <td>{{person.boss}}</td>
         <td style = "cursor: pointer;">
         <button  type="button" class="btn btn-primary">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
@@ -58,7 +59,7 @@
 
       <!-- Modal Header -->
       <div class="modal-header">
-        <h4 class="modal-title">Create person</h4>
+        <h4 class="modal-title">Create Employee</h4>
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
 
@@ -99,7 +100,7 @@
             <option value="" selected>select a boss</option>
              <option 
               *ngFor="let boss of bosses" 
-              [ngValue] = "boss.id+boss.name">{{boss.name}}</option>
+              [ngValue] = "boss">{{boss}}</option>
             </select>
             <div class="invalid-feedback">
               Please provide a valid data.

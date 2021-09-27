@@ -13,11 +13,7 @@ export class PersonalService {
   public getPersonal(): Observable<any>{
     return this.http.get(`${environment.ApiUrl}person/`);
   }
-  public getBosses(): Observable<any>{
-    return this.http.get(`${environment.ApiUrl}boss/`);
-  }
-
-  public savePerson(person:any): Observable<any>{
-    return this.http.post(`${environment.ApiUrl}person/`, person);
+   public savePerson(person:any): Observable<any>{
+    return this.http.post(`${environment.ApiUrl}person/savePerson`, person);
   }
 }
