@@ -12,68 +12,65 @@ import Swal, { SweetAlertIcon } from 'sweetalert2';
 
 export class AppComponent implements OnInit {
 
-  data:any;
-  bosses:any[] = [];
-  // bosses:any;
+  data: any;
+  bosses: any[] = [];
 
   public f = this.form.group({
-    id:[''],
-    name:['',[Validators.required]],
-    type:['',[Validators.required]],
-    boss:['',[Validators.required]]
+    id: [''],
+    name: ['', [Validators.required]],
+    type: ['', [Validators.required]],
+    boss: ['', [Validators.required]]
 
   });
 
   public fU = this.form.group({
-    id:[''],
-    name:['',[Validators.required]],
-    type:['',[Validators.required]],
-    boss:['',[Validators.required]]
+    id: [''],
+    name: ['', [Validators.required]],
+    type: ['', [Validators.required]],
+    boss: ['', [Validators.required]]
 
   });
 
   formSubmitted = false;
 
-  constructor(private personalService:PersonalService,
-              private form:FormBuilder){}
+  constructor(private personalService: PersonalService,
+    private form: FormBuilder) { }
 
-  ngOnInit(){
+  ngOnInit() {
 
-    this.personalService.getPersonal().subscribe(resp =>{
-     
+    this.personalService.getPersonal().subscribe(resp => {
+
       let data = [];
-      for(const i in resp){
+      for (const i in resp) {
         data.push(resp[i]);
       }
-      this.data = data;  
+      this.data = data;
 
-      for(const i in this.data){
+      for (const i in this.data) {
 
-        if(this.data[i].type == "boss"){
+        if (this.data[i].type == "boss") {
           this.bosses.push(this.data[i].name);
         }
-     }
-   },err => console.error(err));
+      }
+    }, err => console.error(err));
   }
-    
-  //title = 'frontPersonal';
 
-  savePerson(){
+  savePerson() {
 
     this.formSubmitted = true;
-    if(this.f.invalid){
+    if (this.f.invalid) {
       return;
     }
 
     let person = {
-      name:this.f.controls.name.value,
-      type:this.f.controls.type.value,
-      boss:this.f.controls.boss.value
+      name: this.f.controls.name.value,
+      type: this.f.controls.type.value,
+      boss: this.f.controls.boss.value
     }
 
-    this.personalService.savePerson(person).subscribe(resp=>{
+    this.personalService.savePerson(person).subscribe(resp => {
 
-       Swal.fire({
+      Swal.fire({
         title: 'Success',
         text: "User saved",
         icon: 'success',
@@ -83,72 +80,70 @@ export class AppComponent implements OnInit {
         window.location.reload();
       })
 
-    },err =>{console.error(err)}
+    }, err => { console.error(err) }
     );
- 
-    }
 
-  invalidField(field:string){
+  }
 
-    if(this.formSubmitted && this.f.controls[field].invalid){
+  invalidField(field: string) {
+
+    if (this.formSubmitted && this.f.controls[field].invalid) {
 
       return true;
 
-    }else{
+    } else {
 
       return false;
 
     }
   }
 
-  deletePerson(id:any){
-    
-    this.personalService.deletePerson(id).subscribe(resp=>{
+  deletePerson(id: any) {
 
-      console.log('resp :>> ', resp);
+    this.personalService.deletePerson(id).subscribe(resp => {
 
-       Swal.fire({
+      Swal.fire({
         title: 'Success',
         text: "User deleted",
         icon: 'success',
         confirmButtonColor: '#075de8',
         confirmButtonText: 'Ok',
-        timer:10000
+        timer: 10000
       }).then((result) => {
         window.location.reload();
       })
-  
 
-     },err=>{console.error(err)}
+
+    }, err => { console.error(err) }
     );
   }
 
-  updatePerson(person:any){
+  updatePerson(person: any) {
 
     let updateForm = this.fU.value;
 
-    for(const i in updateForm){
+    for (const i in updateForm) {
 
-      if(updateForm[i] == ''){
+      if (updateForm[i] == '') {
 
         updateForm[i] = person[i]
-      
+
       }
     }
 
-    this.personalService.savePerson(updateForm).subscribe(resp=>{
+    this.personalService.savePerson(updateForm).subscribe(resp => {
 
       Swal.fire({
-       title: 'Success',
-       text: "User updated",
-       icon: 'success',
-       confirmButtonColor: '#075de8',
-       confirmButtonText: 'Ok'
-     }).then((result) => {
-       window.location.reload();
-     })
+        title: 'Success',
+        text: "User updated",
+        icon: 'success',
+        confirmButtonColor: '#075de8',
+        confirmButtonText: 'Ok'
+      }).then((result) => {
+        window.location.reload();
+      })
 
-   },err =>{console.error(err)}
-   );
+    }, err => { console.error(err) }
+    );
   }
 }
